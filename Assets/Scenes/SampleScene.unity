@@ -4555,7 +4555,8 @@ MonoBehaviour:
   wallJumpLerp: 5
   dashSpeed: 40
   edgeTime: 0.1
-  jumpBufferTime: 0.5
+  jumpBufferTime: 0.2
+  dashBufferTime: 0.4
   canMove: 1
   wallGrab: 0
   wallJumped: 0

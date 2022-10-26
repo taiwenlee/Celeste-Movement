@@ -20,6 +20,7 @@ public class Movement : MonoBehaviour
    public float dashSpeed = 20;
    public float edgeTime = 0.1f;
    public float jumpBufferTime = 0.2f;
+   public float dashBufferTime = 0.4f;
 
    [Space]
    [Header("Booleans")]
@@ -35,6 +36,7 @@ public class Movement : MonoBehaviour
    private bool hasDashed;
    private float edgeTimeCounter;
    private float jumpBufferCounter;
+   private float dashBufferTimeCounter;
 
    public int side = 1;
 
@@ -83,6 +85,16 @@ public class Movement : MonoBehaviour
          jumpBufferCounter -= Time.deltaTime;
       }
 
+      if(!isDashing)
+      {
+         dashBufferTimeCounter = dashBufferTime;
+      }
+      else
+      {
+         dashBufferTimeCounter -= Time.deltaTime;
+      }
+
+      // climb logic
       if (coll.onWall && Input.GetButton("Fire3") && canMove)
       {
          if (side != coll.wallSide)
@@ -267,6 +279,12 @@ public class Movement : MonoBehaviour
 
       if (!canMove)
          return;
+
+      if(isDashing && dashBufferTimeCounter > 0f) {
+         Debug.Log("cancelled Wallslide");
+         return;
+      }
+         
 
       bool pushingWall = false;
       if ((rb.velocity.x > 0 && coll.onRightWall) || (rb.velocity.x < 0 && coll.onLeftWall))
