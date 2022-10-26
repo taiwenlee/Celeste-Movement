@@ -281,7 +281,6 @@ public class Movement : MonoBehaviour
          return;
 
       if(isDashing && dashBufferTimeCounter > 0f) {
-         Debug.Log("cancelled Wallslide");
          return;
       }
          
@@ -356,5 +355,29 @@ public class Movement : MonoBehaviour
    {
       int particleSide = coll.onRightWall ? 1 : -1;
       return particleSide;
+   }
+
+   public void ToggleEdge() {
+      if(edgeTime == 0f) {
+         edgeTime = 0.2f;
+      } else {
+         edgeTime = 0f;
+      }
+   }
+
+   public void ToggleJumpCache() {
+      if(jumpBufferTime == 0f) {
+         jumpBufferTime = 0.5f;
+      } else {
+         jumpBufferTime = 0f;
+      }
+   }
+
+   public void ToggleDashWall() {
+      if(dashBufferTime == 0f) {
+         dashBufferTime = 0.2f;
+      } else {
+         dashBufferTime = 0f;
+      }
    }
 }
